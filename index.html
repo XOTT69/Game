@@ -211,6 +211,7 @@ function dailyTick(){
  if(s.debt>0){const fee=Math.max(1,Math.ceil(s.debt*.004));s.debt+=fee;s.totalSpent+=fee;log("↘","Відсотки за боргом","Нараховано за день",-fee)}
  if(s.day%3===0){spend(450,"Комунальні платежі",true);toast("Сплачено комунальні: ₴450.")}
  if(s.day%7===0){spend(3800,"Оренда житла",true);toast("День оренди: ₴3 800. Плануй бюджет заздалегідь.")}
+ ASSETS.forEach(a=>{const oldPrice=s.market[a.id]||a.start;const nextPrice=Math.max(100,Math.round(oldPrice*(1+(Math.random()*2-1)*a.vol)));s.market[a.id]=nextPrice;s.marketChanges[a.id]=Math.round((nextPrice-oldPrice)/oldPrice*10000)/100;});
  s.workedToday=false;s.ateToday=false;s.savedToday=false;
  s.history.push(net());s.history=s.history.slice(-7);
 }
