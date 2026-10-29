@@ -1,0 +1,54 @@
+name: Deploy life simulator to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Validate game JavaScript and manifest
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const html = fs.readFileSync('index.html', 'utf8');
+          const scripts = [...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/gi)];
+          if (!scripts.length) throw new Error('No inline JavaScript found');
+          for (const [i, match] of scripts.entries()) new Function(match[1]);
+          JSON.parse(fs.readFileSync('manifest.webmanifest', 'utf8'));
+          for (const path of ['index.html', 'manifest.webmanifest', 'icon.svg', 'sw.js']) {
+            if (!fs.existsSync(path)) throw new Error('Missing deploy asset: ' + path);
+          }
+          console.log('JavaScript syntax, manifest and deployment assets: OK');
+          NODE
+      - name: Upload site artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
