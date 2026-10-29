@@ -310,10 +310,10 @@ function renderHome(){
  $("homeTitle").textContent=["Невелика орендована квартира","Квартира з робочим місцем","Оновлена квартира","Затишний дім"][s.homeLevel];
  $("homeDesc").textContent=["Простий старт. Зроби житло місцем, де відновлюються сили.","З'явилося окреме місце для роботи та планування.","Кухня оновлена — побут стає зручнішим.","Ти створив(-ла) простір, який підтримує тебе щодня."][s.homeLevel];
  $("homeChoices").innerHTML=levels.map((x,i)=>'<div class="choice '+(i<s.homeLevel?'owned':'')+'"><div class="choiceicon">'+(i<s.homeLevel?'✓':x.icon)+'</div><h4>'+x.name+'</h4><p>'+(i<s.homeLevel?'Покращення придбано':x.desc)+'</p><div class="price">'+(i<s.homeLevel?'Готово':money(x.price))+'</div><button class="btn '+(i===s.homeLevel?'primary':'secondary')+'" '+(i!==s.homeLevel?'disabled':'')+' data-upgrade="yes">'+(i<s.homeLevel?'Придбано':i===s.homeLevel?'Покращити':'Закрито')+'</button></div>').join("");
- const btn=$("homeChoices").querySelector('[data-upgrade="yes"]');if(btn)btn.onclick=improveHome
+ const btn=$("homeChoices").querySelector('[data-upgrade="yes"]:not([disabled])');if(btn)btn.onclick=improveHome
 }
 function renderChart(){
- const arr=s.history.length?s.history.slice(-7):[net()];const vals=arr.concat(net());const min=Math.min(...vals,0),max=Math.max(...vals,1),span=max-min||1;
+ const arr=s.history.length?s.history.slice(-7):[net()];const vals=arr.concat(net());const min=Math.min(...vals),max=Math.max(...vals),span=max-min||1;
  $("wealthChart").innerHTML=vals.slice(-7).map((v,i)=>{const h=Math.max(6,((v-min)/span)*100);return '<div class="chartcol"><div class="chartbar" style="height:'+h+'%"></div><div class="chartlabel">'+(i===vals.slice(-7).length-1?'Зараз':'-'+(vals.slice(-7).length-1-i))+'</div></div>'}).join("")
 }
 function render(){
