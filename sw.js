@@ -1,4 +1,4 @@
-const CACHE="moie-zhyttia-v5";
+const CACHE="moie-zhyttia-v6";
 const ASSETS=["./","./index.html","./manifest.webmanifest","./icon.svg"];
 self.addEventListener("install",event=>{
   event.waitUntil(caches.open(CACHE).then(cache=>cache.addAll(ASSETS)));
