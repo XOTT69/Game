@@ -1,14 +1,14 @@
 {
-  "name": "Затишна Гавань",
-  "short_name": "Гавань",
-  "description": "Українська merge-гра про кафе біля моря",
+  "name": "Моє життя — симулятор",
+  "short_name": "Моє життя",
+  "description": "Економічний симулятор роботи, побуту та особистих фінансів.",
   "lang": "uk",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#fff7e8",
-  "theme_color": "#0d6670",
+  "background_color": "#f5f6f8",
+  "theme_color": "#f7f8fa",
   "icons": [
     {
       "src": "icon.svg",
