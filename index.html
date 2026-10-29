@@ -177,7 +177,8 @@ const JOBS=[
  {name:"Старший спеціаліст",short:"Складні задачі й наставництво",base:1280,skill:50,shifts:10},
  {name:"Керівник напрямку",short:"Відповідальність і команда",base:1650,skill:75,shifts:18}
 ];
-const ASSETS=[{id:"bonds",name:"Державні облігації",icon:"🏛️",desc:"Нижчий ризик, повільніші коливання.",start:1000,vol:.004},{id:"index",name:"Індексний фонд",icon:"📈",desc:"Диверсифікований ринок із середнім ризиком.",start:1500,vol:.025},{id:"startup",name:"Стартап-фонд",icon:"🚀",desc:"Високий ризик і потенційно великі зміни.",start:800,vol:.065}];\nconst fresh=()=>({day:1,hour:8,cash:8500,bank:12000,debt:2800,energy:82,hunger:76,mood:70,health:100,skill:12,xp:20,tier:0,shifts:0,homeLevel:0,totalEarned:0,totalSpent:0,workedToday:false,ateToday:false,savedToday:false,loanUsed:false,log:[],history:[],eventCount:0,holdings:{bonds:0,index:0,startup:0},market:{bonds:1000,index:1500,startup:800},marketChanges:{bonds:0,index:0,startup:0}});
+const ASSETS=[{id:"bonds",name:"Державні облігації",icon:"🏛️",desc:"Нижчий ризик, повільніші коливання.",start:1000,vol:.004},{id:"index",name:"Індексний фонд",icon:"📈",desc:"Диверсифікований ринок із середнім ризиком.",start:1500,vol:.025},{id:"startup",name:"Стартап-фонд",icon:"🚀",desc:"Високий ризик і потенційно великі зміни.",start:800,vol:.065}];
+const fresh=()=>({day:1,hour:8,cash:8500,bank:12000,debt:2800,energy:82,hunger:76,mood:70,health:100,skill:12,xp:20,tier:0,shifts:0,homeLevel:0,totalEarned:0,totalSpent:0,workedToday:false,ateToday:false,savedToday:false,loanUsed:false,log:[],history:[],eventCount:0,holdings:{bonds:0,index:0,startup:0},market:{bonds:1000,index:1500,startup:800},marketChanges:{bonds:0,index:0,startup:0}});
 let s;
 try{s=JSON.parse(localStorage.getItem(SAVE_KEY))}catch(e){s=null}
 const valid=s&&typeof s==="object"&&Number.isFinite(s.day)&&Number.isFinite(s.cash)&&Number.isFinite(s.bank)&&Number.isFinite(s.debt);
@@ -185,7 +186,9 @@ if(!valid)s=fresh();
 const defaults=fresh();Object.keys(defaults).forEach(k=>{if(s[k]===undefined)s[k]=defaults[k]});s.holdings={...defaults.holdings,...(s.holdings||{})};s.market={...defaults.market,...(s.market||{})};s.marketChanges={...defaults.marketChanges,...(s.marketChanges||{})};
 function clamp(n,min=0,max=100){return Math.max(min,Math.min(max,Number(n)||0))}
 function money(n){return "₴"+Math.round(n).toLocaleString("uk-UA")}
-function portfolioValue(){return ASSETS.reduce((sum,a)=>sum+(s.holdings[a.id]||0)*(s.market[a.id]||a.start),0)}\nfunction portfolioCost(){return ASSETS.reduce((sum,a)=>sum+(s.holdings[a.id]||0)*a.start,0)}\nfunction net(){return s.cash+s.bank+portfolioValue()-s.debt}
+function portfolioValue(){return ASSETS.reduce((sum,a)=>sum+(s.holdings[a.id]||0)*(s.market[a.id]||a.start),0)}
+function portfolioCost(){return ASSETS.reduce((sum,a)=>sum+(s.holdings[a.id]||0)*a.start,0)}
+function net(){return s.cash+s.bank+portfolioValue()-s.debt}
 function salary(){return JOBS[s.tier].base+Math.floor(s.skill*8)}
 function save(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(s))}catch(e){toast("Не вдалося зберегти прогрес у браузері.")}}
 let toastTimer;
@@ -319,13 +322,24 @@ function tradeAsset(id,side){
 }
 function renderMarket(){
  const value=portfolioValue(),cost=portfolioCost(),profit=value-cost;
- $("portfolioValue").textContent=money(value);$("portfolioCost").textContent=money(cost);
+ $("portfolioValue").textContent=money(value);
+ $("portfolioCost").textContent=money(cost);
  $("portfolioProfit").textContent=(profit>0?"+":profit<0?"−":"")+money(Math.abs(profit));
  $("portfolioProfit").className="statvalue "+(profit>0?"positive":profit<0?"negative":"");
- $("marketDay").textContent=s.day;$("freelancePay").textContent="Оплата: "+money(350+Math.round(s.skill*7))+" · 2 год";
+ $("marketDay").textContent=s.day;
+ $("freelancePay").textContent="Оплата: "+money(350+Math.round(s.skill*7))+" · 2 год";
  $("marketAssets").innerHTML=ASSETS.map(a=>{
-  const price=s.market[a.id]||a.start,change=s.marketChanges[a.id]||0,owned=s.holdings[a.id]||0;
-  return '<div class="market-card"><div class="row between"><span style="font-size:24px">'+a.icon+'</span><span class="badge">У портфелі: '+owned+'</span></div><h4>'+a.name+'</h4><p>'+a.desc+'</p><div class="market-price">'+money(price)+'</div><div class="market-change '+(change>0?"positive":change<0?"negative":"muted")+'">'+(change>0?"+":"")+change.toLocaleString("uk-UA")+"% за останній день</div><div class="market-actions"><button class="btn primary" data-buy="'+a.id+'">Купити</button><button class="btn outline" data-sell="'+a.id+'" '+(owned<1?"disabled":"")+'>Продати</button></div></div>'
+  const price=s.market[a.id]||a.start;
+  const change=s.marketChanges[a.id]||0;
+  const owned=s.holdings[a.id]||0;
+  const changeClass=change>0?"positive":change<0?"negative":"muted";
+  const changeText=(change>0?"+":"")+change.toLocaleString("uk-UA")+"% за останній день";
+  return `<div class="market-card">
+    <div class="row between"><span style="font-size:24px">${a.icon}</span><span class="badge">У портфелі: ${owned}</span></div>
+    <h4>${a.name}</h4><p>${a.desc}</p><div class="market-price">${money(price)}</div>
+    <div class="market-change ${changeClass}">${changeText}</div>
+    <div class="market-actions"><button class="btn primary" data-buy="${a.id}">Купити</button><button class="btn outline" data-sell="${a.id}" ${owned<1?"disabled":""}>Продати</button></div>
+  </div>`;
  }).join("");
  $("marketAssets").querySelectorAll("[data-buy]").forEach(b=>b.onclick=()=>tradeAsset(b.dataset.buy,"buy"));
  $("marketAssets").querySelectorAll("[data-sell]").forEach(b=>b.onclick=()=>tradeAsset(b.dataset.sell,"sell"));
@@ -334,7 +348,8 @@ function freelance(){
  if(s.energy<12){toast("Потрібно відновити енергію перед підробітком.");return}
  const pay=350+Math.round(s.skill*7);earn(pay,"Фриланс-проєкт");s.skill=clamp(s.skill+1.5,0,100);s.xp+=12;s.energy=clamp(s.energy-12);s.mood=clamp(s.mood-2);advance(2);toast("Проєкт завершено: +"+money(pay)+". Навички теж зросли.");render()
 }
-\nfunction renderTasks(){
+
+function renderTasks(){
  const list=tasks();$("tasks").innerHTML=list.map(t=>'<div class="task '+(t.done?'done':'')+'"><div class="taskcheck">'+(t.done?'✓':'·')+'</div><div class="grow"><div class="taskname">'+t.title+'</div><div class="taskdesc">'+t.desc+'</div></div><div class="taskreward">+'+money(t.reward)+'</div></div>').join("");
  $("taskProgress").textContent=list.filter(t=>t.done).length+"/3"
 }
