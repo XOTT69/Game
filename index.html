@@ -1,49 +1,348 @@
 <!doctype html>
 <html lang="uk">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0d6670"><meta name="description" content="Українська merge-гра про затишне кафе біля моря">
-<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg" type="image/svg+xml">
-<title>Затишна Гавань</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f7f8fa">
+<meta name="description" content="Моє життя — економічний симулятор роботи, побуту та особистих фінансів.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<title>Моє життя — симулятор</title>
 <style>
-:root{--sea:#0d6670;--sea2:#168995;--ink:#24424a;--coral:#ff9278;--shadow:0 8px 22px #19434b1c}*{box-sizing:border-box}body{margin:0;background:linear-gradient(#dff5f0,#fff7e8 48%,#f8ead5);font-family:ui-rounded,system-ui,-apple-system,sans-serif;color:var(--ink);min-height:100vh}button{font:inherit;cursor:pointer;border:0}.app{max-width:520px;margin:auto;min-height:100dvh;padding:env(safe-area-inset-top) 14px calc(95px + env(safe-area-inset-bottom))}header{display:flex;justify-content:space-between;align-items:center;padding:14px 2px 10px;gap:8px}.brand{font-size:21px;font-weight:950;color:var(--sea);line-height:1}.brand small{display:block;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#60858a;margin-top:5px}.wallets{display:flex;gap:6px}.wallet{background:#fffdf6;border-radius:13px;padding:9px;font-size:12px;font-weight:850;box-shadow:var(--shadow);white-space:nowrap}.scene{border-radius:25px;background:linear-gradient(#8cdae0 0%,#c5eee2 56%,#f6dca9 57%,#efc78f);padding:14px;min-height:174px;position:relative;overflow:hidden;box-shadow:var(--shadow)}.sun{position:absolute;right:24px;top:18px;width:40px;height:40px;border-radius:50%;background:#ffe59a;box-shadow:0 0 0 9px #ffe59a40}.cloud{position:absolute;left:25px;top:25px;font-size:30px;opacity:.7}.scene-title{font-size:22px;font-weight:950;position:relative;line-height:1.1}.scene-sub{font-size:12px;color:#32656a;position:relative;margin-top:6px}.cafe{position:relative;margin:13px auto 0;width:185px;height:73px}.roof{position:absolute;left:4px;right:4px;top:0;height:28px;background:#ff947b;border:3px solid #fff5dc;border-radius:10px 10px 3px 3px;clip-path:polygon(10% 0,90% 0,100% 100%,0 100%)}.front{position:absolute;left:14px;right:14px;top:22px;height:49px;background:#fff5df;border:3px solid #e6b66e;border-radius:5px}.awning{position:absolute;top:18px;left:20px;right:20px;height:17px;background:repeating-linear-gradient(90deg,#fff 0 15px,#ff947b 15px 30px);border:2px solid #fff5df;border-radius:4px}.door{position:absolute;bottom:0;left:72px;width:34px;height:42px;background:#8cbbc0;border:3px solid #fff5df;border-radius:7px 7px 0 0}.window{position:absolute;bottom:12px;right:23px;width:30px;height:22px;background:#8cbbc0;border:3px solid #fff5df}.progressline{display:flex;align-items:center;gap:9px;margin:12px 2px}.level{background:var(--sea);color:white;border-radius:12px;padding:8px 10px;font-size:12px;font-weight:900}.progress{height:10px;flex:1;background:#ffffffb5;border-radius:99px;overflow:hidden}.progress div{height:100%;background:linear-gradient(90deg,#ffb071,#ff8e75);width:28%;transition:width .2s}.xp{font-size:11px;font-weight:800;color:#52777a;white-space:nowrap}.head{display:flex;justify-content:space-between;align-items:center;margin:16px 2px 9px}.head h2{font-size:17px;margin:0}.head span{font-size:11px;color:#68878a;font-weight:700}.task,.panel{display:flex;align-items:center;gap:10px;background:#fffdf7e8;border:1px solid white;border-radius:17px;padding:11px;box-shadow:var(--shadow)}.taskicon{width:44px;height:44px;display:grid;place-items:center;background:#ffebc6;border-radius:14px;font-size:26px}.tasktext{flex:1;min-width:0}.tasktext b,.panel b{display:block;font-size:13px}.tasktext small,.panel small{display:block;color:#719093;font-size:11px;margin-top:4px;line-height:1.35}.orderbtn{background:var(--coral);color:#663e37;font-size:12px;font-weight:900;border-radius:12px;padding:10px;box-shadow:0 3px 0 #e57964;white-space:nowrap}.orderbtn:disabled{opacity:.4;box-shadow:none}.boardwrap{background:#f8e2bd;border:4px solid #fff6e5;border-radius:22px;padding:8px;box-shadow:inset 0 0 0 1px #e8c998,var(--shadow)}.board{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.cell{aspect-ratio:1;border-radius:12px;background:#eacb98;display:grid;place-items:center;position:relative;padding:0;min-width:0}.cell.filled{background:linear-gradient(145deg,#fffaf0,#f4e1bd);box-shadow:0 2px 0 #e3c18a}.cell.selected{outline:3px solid var(--sea2);outline-offset:1px;background:#d4f2e8}.cell.merged{animation:merge-pop .46s cubic-bezier(.2,1.5,.4,1)}@keyframes merge-pop{0%{transform:scale(.78);filter:brightness(1.2)}55%{transform:scale(1.13);filter:brightness(1.12)}100%{transform:scale(1);filter:brightness(1)}}.scene.rewarded:after{content:"✨  ✦  ✨";position:absolute;z-index:2;left:50%;top:53%;transform:translate(-50%,-50%);font-size:25px;white-space:nowrap;pointer-events:none;animation:reward-burst .85s ease-out forwards}@keyframes reward-burst{0%{opacity:0;transform:translate(-50%,0) scale(.5)}25%{opacity:1}100%{opacity:0;transform:translate(-50%,-38px) scale(1.3)}}@media(prefers-reduced-motion:reduce){.cell.merged,.scene.rewarded:after{animation:none}}.emoji{font-size:clamp(22px,7vw,34px);line-height:1}.lv{position:absolute;right:3px;bottom:3px;font-size:8px;font-weight:900;color:#8a6a3e;background:#fff6dfcc;border-radius:5px;padding:1px 3px}.hint{text-align:center;font-size:11px;color:#8d7552;margin:8px 0 0;min-height:15px}.actions{display:flex;gap:8px;margin-top:10px}.soft{flex:1;background:#fffdf6;border-radius:13px;padding:11px 7px;font-size:12px;font-weight:850;color:#517579;box-shadow:var(--shadow)}.soft:disabled{opacity:.4}.panel{margin-top:12px}.panel .body{flex:1}.tiny{background:#d8f2e8;color:#28656b;border-radius:10px;padding:9px;font-size:11px;font-weight:900;white-space:nowrap}.nav{position:fixed;z-index:5;bottom:0;left:50%;transform:translateX(-50%);width:min(520px,100%);padding:10px 15px calc(10px + env(safe-area-inset-bottom));display:grid;grid-template-columns:repeat(4,1fr);gap:8px;background:#fffaf0ed;backdrop-filter:blur(14px);border-top:1px solid white}.nav button{background:transparent;color:#729092;border-radius:13px;padding:6px 2px;font-size:10px;font-weight:800}.nav span{display:block;font-size:21px;margin-bottom:2px}.nav button.active{color:var(--sea);background:#dff4eb}.toast{position:fixed;z-index:10;left:50%;bottom:100px;transform:translate(-50%,12px);opacity:0;pointer-events:none;background:#214d52;color:white;padding:11px 16px;border-radius:14px;font-size:13px;font-weight:800;transition:.2s;max-width:90%;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.back{position:fixed;inset:0;z-index:20;background:#173a40a6;display:none;align-items:center;justify-content:center;padding:20px}.back.show{display:flex}.modal{width:min(360px,100%);background:#fff8e9;border-radius:24px;padding:22px;text-align:center;box-shadow:0 20px 60px #092c3340}.modal .big{font-size:55px}.modal h3{margin:5px 0 8px;font-size:21px}.modal p{font-size:13px;color:#688286;line-height:1.5;white-space:pre-line}.modal button{background:var(--sea);color:white;padding:12px 20px;border-radius:13px;font-weight:900;margin-top:7px}@media(min-width:440px){.app{padding-left:18px;padding-right:18px}.board{gap:8px}.cell{border-radius:14px}}
-</style></head><body><div class="app">
-<header><div class="brand">Затишна Гавань<small>твоя історія біля моря</small></div><div class="wallets"><div class="wallet">🪙 <b id="coins">120</b></div><div class="wallet">⚡ <b id="energy">20</b></div></div></header>
-<section class="scene" id="scene"><div class="sun"></div><div class="cloud">☁️</div><div class="scene-title" id="sceneTitle">Маленьке кафе,<br>великі мрії</div><div class="scene-sub" id="sceneSub">Допоможи Марійці повернути гавані затишок.</div><div class="cafe"><div class="roof"></div><div class="front"></div><div class="awning"></div><div class="door"></div><div class="window"></div></div></section>
-<div class="progressline"><div class="level" id="level">РІВЕНЬ 1</div><div class="progress"><div id="xpbar"></div></div><div class="xp" id="xptext">28 / 100 ⭐</div></div>
-<div class="head"><h2>📋 Замовлення дня</h2><span id="orderCount">Виконано: 0</span></div>
-<div class="task"><div class="taskicon" id="orderEmoji">☕</div><div class="tasktext"><b id="orderName">Кава для рибалки</b><small id="orderDesc"></small></div><button class="orderbtn" id="deliverBtn">Віддати · <span id="reward">25</span> 🪙</button></div>
-<div class="head"><h2>🧺 Твій столик</h2><span id="boardCount">18 / 20 клітинок</span></div><div class="boardwrap"><div class="board" id="board"></div><div class="hint">Обери предмет, а потім такий самий — об'єднай. Обери предмет і порожню клітинку, щоб перемістити.</div></div>
-<div class="actions"><button class="soft" id="spawnBtn">☕ Зробити каву · 1 ⚡</button><button class="soft" id="energyBtn">✨ +5 енергії · 15 🪙</button></div>
-<div class="panel"><div style="font-size:25px">🧹</div><div class="body"><b id="restoreTitle">Відновлення тераси</b><small id="restoreDesc">Збирай досвід, щоб відновити куточки гавані.</small></div><button class="tiny" id="restoreBtn">Відновити · 30 ⭐</button></div>
-</div><nav class="nav"><button class="active" data-tab="home"><span>🏡</span>Гавань</button><button data-tab="orders"><span>🧾</span>Замовлення</button><button data-tab="story"><span>📖</span>Історія</button><button data-tab="decor"><span>🪴</span>Декор</button></nav>
-<div class="toast" id="toast"></div><div class="back" id="back"><div class="modal"><div class="big" id="mEmoji">🌊</div><h3 id="mTitle"></h3><p id="mText"></p><button id="close">Продовжити</button></div></div>
+:root{color-scheme:light;--bg:#f5f6f8;--surface:#fff;--ink:#182230;--muted:#7a8494;--line:#e7eaf0;--primary:#3459e6;--primary-soft:#edf1ff;--green:#16845b;--green-soft:#e9f7f0;--orange:#bd6b12;--orange-soft:#fff3e4;--red:#c44545;--red-soft:#fff0ef;--radius:20px;--shadow:0 8px 28px #1b29400a}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;font-size:14px;line-height:1.45}button,input{font:inherit}button{cursor:pointer;border:0}button:disabled{opacity:.45;cursor:not-allowed}.shell{max-width:1180px;margin:auto;padding:24px 24px 100px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:26px}.brand{display:flex;align-items:center;gap:12px;min-width:0}.logo{width:44px;height:44px;display:grid;place-items:center;background:var(--primary);color:white;border-radius:14px;font-size:21px;font-weight:900;box-shadow:0 7px 18px #3459e62a}.brand h1{font-size:18px;margin:0;letter-spacing:-.5px}.brand p{font-size:12px;color:var(--muted);margin:2px 0 0}.topright{display:flex;align-items:center;gap:10px}.daychip,.balancechip{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 13px;font-size:12px;font-weight:750;white-space:nowrap}.daychip span{color:var(--muted);font-weight:600}.balancechip b{font-size:14px}.layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:22px}.sidebar{display:flex;flex-direction:column;gap:6px;align-self:start;position:sticky;top:18px}.navbtn{display:flex;align-items:center;gap:12px;width:100%;padding:12px 14px;text-align:left;border-radius:13px;background:transparent;color:#657084;font-weight:700}.navbtn .ico{font-size:18px;width:23px;text-align:center}.navbtn.active{background:var(--primary-soft);color:var(--primary)}.side-note{margin-top:18px;padding:14px;border:1px solid var(--line);background:#ffffffa6;border-radius:16px;color:var(--muted);font-size:11px}.side-note b{display:block;color:var(--ink);font-size:12px;margin-bottom:5px}.main{min-width:0}.page{display:none}.page.active{display:block;animation:fade-in .18s ease-out}@keyframes fade-in{from{opacity:.5;transform:translateY(3px)}to{opacity:1;transform:none}}.pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 0 18px}.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:1.4px;color:var(--muted);font-weight:850}.pagehead h2{font-size:27px;letter-spacing:-1px;margin:3px 0 0;line-height:1.15}.pagehead p{margin:6px 0 0;color:var(--muted);font-size:13px}.pill{display:inline-flex;align-items:center;gap:6px;border-radius:99px;background:var(--green-soft);color:var(--green);font-size:11px;font-weight:800;padding:7px 10px;white-space:nowrap}.grid{display:grid;gap:14px}.grid.stats{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:14px}.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:19px;box-shadow:var(--shadow);min-width:0}.statlabel{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:12px;font-weight:700;gap:6px}.staticon{width:31px;height:31px;border-radius:10px;background:#f3f5f9;display:grid;place-items:center;font-size:16px}.statvalue{font-size:25px;letter-spacing:-1px;font-weight:850;margin:11px 0 4px;overflow-wrap:anywhere}.statfoot{font-size:11px;color:var(--muted)}.positive{color:var(--green)!important}.negative{color:var(--red)!important}.hero{background:linear-gradient(120deg,#263fbb,#466af1);color:#fff;border:0;position:relative;overflow:hidden;padding:24px}.hero:after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;border:1px solid #ffffff22;right:-50px;top:-100px;box-shadow:0 0 0 28px #ffffff08,0 0 0 60px #ffffff05}.hero .eyebrow,.hero .muted{color:#dce4ff}.hero .heroamount{font-size:clamp(34px,5vw,48px);letter-spacing:-2px;font-weight:900;margin:6px 0}.hero .herofoot{display:flex;justify-content:space-between;align-items:flex-end;gap:15px;position:relative;z-index:1}.hero .herofoot p{font-size:12px;margin:0}.hero .heroactions{display:flex;gap:8px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:11px 14px;border-radius:12px;font-weight:800;font-size:12px;transition:transform .12s,background .12s}.btn:active{transform:scale(.98)}.btn.primary{background:var(--primary);color:#fff}.btn.white{background:#fff;color:#263fbb}.btn.glass{background:#ffffff1a;color:#fff;border:1px solid #ffffff35}.btn.secondary{background:#f2f4f8;color:#3b4658}.btn.outline{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn.green{background:var(--green-soft);color:var(--green)}.btn.orange{background:var(--orange-soft);color:var(--orange)}.btn.red{background:var(--red-soft);color:var(--red)}.btn.full{width:100%}.sectiontitle{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:22px 0 11px}.sectiontitle h3{font-size:15px;letter-spacing:-.25px;margin:0}.sectiontitle span{font-size:11px;color:var(--muted)}.split{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:14px}.row{display:flex;align-items:center;gap:12px}.row.between{justify-content:space-between}.row.start{align-items:flex-start}.grow{flex:1;min-width:0}.muted{color:var(--muted)}.small{font-size:11px}.medium{font-size:13px}.strong{font-weight:800}.jobicon{width:49px;height:49px;border-radius:15px;background:#edf1ff;display:grid;place-items:center;font-size:24px;flex-shrink:0}.jobtitle{font-size:15px;font-weight:850}.jobsub{font-size:12px;color:var(--muted);margin-top:3px}.divider{height:1px;background:var(--line);margin:17px 0}.moneyline{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:10px 0;font-size:12px}.moneyline b{font-size:13px}.bar{height:7px;border-radius:99px;background:#edf0f5;overflow:hidden}.bar>i{display:block;height:100%;width:50%;background:var(--primary);border-radius:99px;transition:width .2s}.bar.green>i{background:#22a574}.bar.orange>i{background:#e9a03a}.bar.red>i{background:#e16c6c}.need{margin:15px 0}.needtop{display:flex;justify-content:space-between;gap:8px;margin-bottom:7px;font-size:12px;font-weight:750}.needtop span:last-child{color:var(--muted)}.quickgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.quick{border:1px solid var(--line);background:#fff;border-radius:15px;padding:13px 12px;text-align:left;min-width:0}.quick .qico{font-size:20px;margin-bottom:8px}.quick b{display:block;font-size:12px}.quick small{display:block;color:var(--muted);font-size:10px;margin-top:4px;line-height:1.4}.task{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid var(--line)}.task:last-child{border-bottom:0;padding-bottom:0}.task:first-child{padding-top:0}.taskcheck{width:29px;height:29px;border-radius:10px;background:#f1f3f7;color:#8791a1;display:grid;place-items:center;font-weight:900;flex-shrink:0}.task.done .taskcheck{background:var(--green-soft);color:var(--green)}.task.done .taskname{text-decoration:line-through;color:var(--muted)}.taskname{font-size:12px;font-weight:800}.taskdesc{font-size:10px;color:var(--muted);margin-top:2px}.taskreward{font-size:11px;font-weight:850;color:var(--green);white-space:nowrap}.eventbox{background:#fff8eb;border:1px solid #f6e5c9;border-radius:15px;padding:14px;display:flex;gap:11px;align-items:flex-start}.eventbox .eventicon{font-size:22px}.eventbox b{font-size:12px;display:block}.eventbox p{font-size:11px;color:#8a7559;margin:4px 0 0}.ledger{display:flex;flex-direction:column;gap:0}.ledgeritem{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid var(--line)}.ledgeritem:last-child{border-bottom:0}.ledgericon{width:36px;height:36px;border-radius:12px;background:#f3f5f9;display:grid;place-items:center;font-size:16px;flex-shrink:0}.ledgername{font-size:12px;font-weight:800}.ledgerdate{font-size:10px;color:var(--muted);margin-top:2px}.ledgeramount{font-size:12px;font-weight:850;margin-left:auto;white-space:nowrap}.progresslabel{display:flex;justify-content:space-between;gap:10px;font-size:11px;margin:12px 0 7px}.chart{height:132px;display:flex;align-items:flex-end;gap:9px;padding-top:14px}.chartcol{height:100%;flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:6px;min-width:0}.chartbar{width:min(100%,27px);min-height:4px;border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,#6885ff,#3459e6)}.chartlabel{font-size:9px;color:var(--muted)}.inputrow{display:flex;gap:8px;align-items:center}.field{width:100%;min-width:0;border:1px solid var(--line);background:#fbfcfe;border-radius:12px;padding:11px 12px;color:var(--ink);outline:none}.field:focus{border-color:#9caeff;box-shadow:0 0 0 3px #3459e612}.formrow{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;margin-top:12px}.choicegrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.choice{border:1px solid var(--line);border-radius:16px;padding:15px;display:flex;flex-direction:column;gap:8px}.choiceicon{font-size:25px}.choice h4{font-size:13px;margin:0}.choice p{font-size:11px;color:var(--muted);margin:0;flex:1}.choice .price{font-size:14px;font-weight:850}.choice.owned{background:#f8fbff;border-color:#d9e2ff}.milestone{display:flex;align-items:center;gap:12px;padding:12px 0}.milestoneicon{width:38px;height:38px;border-radius:12px;background:#f3f5f9;display:grid;place-items:center;font-size:18px}.milestone b{font-size:12px}.milestone small{display:block;font-size:10px;color:var(--muted);margin-top:3px}.badge{font-size:10px;font-weight:850;background:#f2f4f8;color:#697588;padding:5px 8px;border-radius:8px;white-space:nowrap}.toast{position:fixed;z-index:30;left:50%;bottom:calc(85px + env(safe-area-inset-bottom));transform:translate(-50%,12px);opacity:0;pointer-events:none;background:#172337;color:#fff;border-radius:14px;padding:12px 17px;max-width:calc(100vw - 32px);box-shadow:0 12px 35px #11182726;font-size:12px;font-weight:750;transition:opacity .2s,transform .2s;text-align:center}.toast.show{opacity:1;transform:translate(-50%,0)}.modalback{position:fixed;inset:0;background:#18223080;z-index:40;display:none;align-items:center;justify-content:center;padding:20px}.modalback.show{display:flex}.modal{width:min(390px,100%);background:#fff;border-radius:22px;padding:24px;box-shadow:0 25px 90px #101a302e}.modal .modalico{font-size:34px}.modal h3{font-size:20px;margin:9px 0 6px}.modal p{font-size:13px;color:var(--muted);line-height:1.6;margin:0 0 18px}.modalactions{display:flex;gap:8px}.mobile-nav{display:none}.empty{padding:25px;text-align:center;color:var(--muted);font-size:12px}
+@media(max-width:900px){.shell{padding:18px 16px 100px}.layout{grid-template-columns:1fr}.sidebar{display:none}.grid.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.mobile-nav{display:grid;position:fixed;z-index:20;bottom:0;left:0;right:0;grid-template-columns:repeat(5,1fr);padding:8px 8px calc(8px + env(safe-area-inset-bottom));background:#fffffff0;backdrop-filter:blur(18px);border-top:1px solid var(--line)}.mobile-nav .navbtn{flex-direction:column;justify-content:center;gap:3px;text-align:center;padding:7px 2px;font-size:9px;border-radius:11px}.mobile-nav .navbtn .ico{font-size:19px}.mobile-nav .navbtn.active{background:var(--primary-soft)}.side-note{display:none}}
+@media(max-width:620px){.shell{padding:13px 12px 100px}.topbar{margin-bottom:18px;gap:8px}.logo{width:39px;height:39px;border-radius:12px}.brand h1{font-size:16px}.brand p{font-size:10px}.topright{gap:5px}.daychip{display:none}.balancechip{padding:9px 10px}.pagehead{align-items:flex-start}.pagehead h2{font-size:24px}.pagehead .pill{font-size:9px;padding:6px 8px}.card{padding:15px;border-radius:17px}.grid.stats{gap:9px}.statvalue{font-size:22px}.statlabel{font-size:11px}.staticon{width:27px;height:27px}.split{grid-template-columns:1fr}.hero{padding:19px}.hero .herofoot{align-items:flex-start;flex-direction:column}.hero .heroactions{width:100%}.hero .heroactions .btn{flex:1}.quickgrid{gap:7px}.quick{padding:11px 9px}.quick b{font-size:11px}.choicegrid{grid-template-columns:1fr}.choice{display:grid;grid-template-columns:42px minmax(0,1fr) auto;align-items:center;gap:8px}.choiceicon{grid-row:span 2}.choice h4{align-self:end}.choice p{grid-column:2;align-self:start}.choice .price{grid-column:3;grid-row:1}.choice .btn{grid-column:2/4}.formrow{grid-template-columns:1fr}.pagehead p{font-size:12px}}
+@media(prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+  <div class="brand"><div class="logo">М</div><div><h1>Моє життя</h1><p>Симулятор рішень і грошей</p></div></div>
+  <div class="topright"><div class="daychip">📅 <b id="topDay">День 1</b> <span>·</span> <b id="topTime">08:00</b></div><div class="balancechip">Баланс <b id="topCash">₴8 500</b></div></div>
+</header>
+<div class="layout">
+<aside class="sidebar">
+  <button class="navbtn active" data-page="overview"><span class="ico">▦</span>Огляд</button>
+  <button class="navbtn" data-page="work"><span class="ico">▤</span>Робота й кар'єра</button>
+  <button class="navbtn" data-page="home"><span class="ico">⌂</span>Мій дім</button>
+  <button class="navbtn" data-page="finance"><span class="ico">↗</span>Фінанси</button>
+  <button class="navbtn" data-page="profile"><span class="ico">◎</span>Мій шлях</button>
+  <div class="side-note"><b>Твоя історія — твої правила</b>Плануй бюджет, розвивай навички й приймай рішення. Прогрес зберігається на цьому пристрої.</div>
+</aside>
+<main class="main">
+<section class="page active" id="page-overview">
+  <div class="pagehead"><div><div class="eyebrow">Твій особистий дашборд</div><h2>Життя під контролем.</h2><p id="greeting">Кожен день — новий шанс стати ближче до мети.</p></div><span class="pill" id="moodPill">● Стабільний день</span></div>
+  <div class="card hero">
+    <div class="eyebrow">Чистий капітал</div><div class="heroamount" id="netWorth">₴17 700</div><div class="muted medium">Усе, чим володієш, мінус борги</div>
+    <div class="herofoot"><p class="muted" id="wealthHint">Твоя фінансова історія починається сьогодні.</p><div class="heroactions"><button class="btn white" data-goto="work">▤ Піти на роботу</button><button class="btn glass" data-goto="finance">↗ Керувати грошима</button></div></div>
+  </div>
+  <div class="grid stats" style="margin-top:14px">
+    <div class="card"><div class="statlabel">Гроші на руках <span class="staticon">💵</span></div><div class="statvalue" id="cashStat">₴8 500</div><div class="statfoot">Для щоденних витрат</div></div>
+    <div class="card"><div class="statlabel">У банку <span class="staticon">🏦</span></div><div class="statvalue" id="bankStat">₴12 000</div><div class="statfoot" id="bankFoot">Заощадження приносять відсотки</div></div>
+    <div class="card"><div class="statlabel">Борг <span class="staticon">↘</span></div><div class="statvalue" id="debtStat">₴2 800</div><div class="statfoot">Відсотки нараховуються щодня</div></div>
+    <div class="card"><div class="statlabel">Зарплата за зміну <span class="staticon">💼</span></div><div class="statvalue" id="salaryStat">₴896</div><div class="statfoot" id="jobFoot">Молодший спеціаліст</div></div>
+  </div>
+  <div class="split">
+    <div class="card"><div class="sectiontitle" style="margin-top:0"><h3>Твій стан</h3><span>Змінюється від дій</span></div>
+      <div class="need"><div class="needtop"><span>⚡ Енергія</span><span id="energyLabel">82%</span></div><div class="bar green"><i id="energyBar"></i></div></div>
+      <div class="need"><div class="needtop"><span>🍲 Ситість</span><span id="hungerLabel">76%</span></div><div class="bar orange"><i id="hungerBar"></i></div></div>
+      <div class="need"><div class="needtop"><span>🙂 Настрій</span><span id="moodLabel">70%</span></div><div class="bar"><i id="moodBar"></i></div></div>
+      <div class="need" style="margin-bottom:0"><div class="needtop"><span>♥ Здоров'я</span><span id="healthLabel">100%</span></div><div class="bar green"><i id="healthBar"></i></div></div>
+    </div>
+    <div class="card"><div class="sectiontitle" style="margin-top:0"><h3>Що зробити сьогодні</h3><span id="taskProgress">0/3</span></div>
+      <div id="tasks"></div><div class="divider"></div><div class="row between"><span class="muted small">Бонус за кожне завдання</span><b class="positive">до ₴450</b></div>
+    </div>
+  </div>
+  <div class="sectiontitle"><h3>Швидкі дії</h3><span>Кожна дія просуває час</span></div>
+  <div class="quickgrid">
+    <button class="quick" id="quickWork"><div class="qico">💼</div><b>Робоча зміна</b><small>8 год · заробіток і досвід</small></button>
+    <button class="quick" id="quickFood"><div class="qico">🛒</div><b>Купити продукти</b><small>₴250 · ситість +48</small></button>
+    <button class="quick" id="quickSleep"><div class="qico">🌙</div><b>Відпочити</b><small>8 год · відновити сили</small></button>
+  </div>
+  <div class="sectiontitle"><h3>Останні події</h3><span>Твій фінансовий щоденник</span></div>
+  <div class="card"><div class="ledger" id="ledger"></div></div>
+</section>
+<section class="page" id="page-work">
+  <div class="pagehead"><div><div class="eyebrow">Розвиток і дохід</div><h2>Робота й кар'єра</h2><p>Час, навички та рішення визначають твій заробіток.</p></div><span class="pill" id="careerPill">Рівень 1</span></div>
+  <div class="card"><div class="row start"><div class="jobicon">💼</div><div class="grow"><div class="jobtitle" id="jobTitle">Молодший спеціаліст</div><div class="jobsub" id="jobSub">Початок кар'єри · повна зайнятість</div></div><span class="badge">Активна робота</span></div>
+    <div class="divider"></div><div class="grid stats" style="grid-template-columns:repeat(3,minmax(0,1fr));margin-bottom:0">
+      <div><div class="statlabel">За зміну</div><div class="statvalue" id="workPay" style="font-size:21px">₴896</div><div class="statfoot">8 годин</div></div>
+      <div><div class="statlabel">Відпрацьовано</div><div class="statvalue" id="shiftCount" style="font-size:21px">0</div><div class="statfoot">змін загалом</div></div>
+      <div><div class="statlabel">Навички</div><div class="statvalue" id="skillValue" style="font-size:21px">12/100</div><div class="statfoot">досвід професії</div></div>
+    </div>
+    <div class="progresslabel"><span>Прогрес навичок</span><b id="skillLabel">12%</b></div><div class="bar"><i id="skillBar"></i></div>
+    <div class="divider"></div><div class="row between"><div><b>Виконати робочу зміну</b><div class="small muted" style="margin-top:3px">Потребує щонайменше 25% енергії.</div></div><button class="btn primary" id="workShift">Працювати · 8 год</button></div>
+  </div>
+  <div class="sectiontitle"><h3>Розвиток навичок</h3><span>Інвестиція в майбутню зарплату</span></div>
+  <div class="split">
+    <div class="card"><div class="row start"><div class="staticon" style="width:42px;height:42px;font-size:21px">📚</div><div class="grow"><b>Професійне навчання</b><p class="small muted" style="margin:4px 0 0">3 години · +5 навичок · +10 досвіду</p></div></div><div class="moneyline"><span>Вартість курсу</span><b>₴250</b></div><button class="btn outline full" id="trainingBtn">Пройти навчання</button></div>
+    <div class="card"><div class="row start"><div class="staticon" style="width:42px;height:42px;font-size:21px">⬆️</div><div class="grow"><b>Попросити підвищення</b><p class="small muted" id="promotionHint" style="margin:4px 0 0">Потрібно покращити навички й набратися досвіду.</p></div></div><div class="moneyline"><span>Наступний рівень</span><b id="nextSalary">+₴220/зміна</b></div><button class="btn green full" id="promoteBtn">Обговорити підвищення</button></div>
+  </div>
+  <div class="sectiontitle"><h3>Кар'єрний шлях</h3><span>Від першого кроку до керівництва</span></div>
+  <div class="card" id="careerPath"></div>
+</section>
+<section class="page" id="page-home">
+  <div class="pagehead"><div><div class="eyebrow">Твій простір</div><h2>Мій дім</h2><p>Комфорт допомагає відновлюватися, але потребує інвестицій.</p></div><span class="pill" id="comfortPill">Комфорт 1/4</span></div>
+  <div class="card hero" style="background:linear-gradient(120deg,#36465e,#647b99)"><div class="eyebrow">Твоя квартира</div><div class="heroamount" id="homeTitle" style="font-size:34px">Невелика орендована квартира</div><div class="muted medium">Оренда — кожні 7 ігрових днів · комунальні — кожні 3 дні</div><div class="herofoot" style="margin-top:19px"><p class="muted" id="homeDesc">Простий старт. Зроби житло місцем, де відновлюються сили.</p><div class="heroactions"><button class="btn glass" data-goto="finance">Перевірити бюджет</button></div></div></div>
+  <div class="sectiontitle"><h3>Покращення житла</h3><span>Одне покращення кожного рівня</span></div>
+  <div class="choicegrid" id="homeChoices"></div>
+  <div class="sectiontitle"><h3>Щоденні потреби</h3><span>Не забувай про себе</span></div>
+  <div class="quickgrid">
+    <button class="quick" id="homeFood"><div class="qico">🛒</div><b>Продукти на день</b><small>₴250 · ситість +48 · 1 година</small></button>
+    <button class="quick" id="homeCoffee"><div class="qico">☕</div><b>Кава й перерва</b><small>₴75 · енергія +12 · настрій +8</small></button>
+    <button class="quick" id="homeSleep"><div class="qico">🛏️</div><b>Повноцінний сон</b><small>8 год · енергія до 100%</small></button>
+  </div>
+</section>
+<section class="page" id="page-finance">
+  <div class="pagehead"><div><div class="eyebrow">Твоя економіка</div><h2>Фінанси</h2><p>Керуй ліквідністю, заощадженнями й боргом.</p></div><span class="pill">Відсотки щодня</span></div>
+  <div class="grid stats">
+    <div class="card"><div class="statlabel">Готівка <span class="staticon">💵</span></div><div class="statvalue" id="finCash">₴8 500</div><div class="statfoot">Безпосередні витрати</div></div>
+    <div class="card"><div class="statlabel">Банківський рахунок <span class="staticon">🏦</span></div><div class="statvalue" id="finBank">₴12 000</div><div class="statfoot" id="interestInfo">+0,2% на день</div></div>
+    <div class="card"><div class="statlabel">Борг <span class="staticon">↘</span></div><div class="statvalue" id="finDebt">₴2 800</div><div class="statfoot">0,4% відсотків на день</div></div>
+    <div class="card"><div class="statlabel">Чистий капітал <span class="staticon">◈</span></div><div class="statvalue" id="finNet">₴17 700</div><div class="statfoot">Активи мінус зобов'язання</div></div>
+  </div>
+  <div class="split">
+    <div class="card"><div class="sectiontitle" style="margin-top:0"><h3>Переказ між рахунками</h3></div><p class="small muted">Переказ не змінює чистий капітал, але допомагає керувати доступними грошима.</p>
+      <label class="small strong" for="transferAmount">Сума переказу, ₴</label><input class="field" id="transferAmount" type="number" min="1" step="50" value="1000" inputmode="numeric" style="margin-top:6px">
+      <div class="formrow"><button class="btn primary" id="depositBtn">↑ Покласти в банк</button><button class="btn outline" id="withdrawBtn">↓ Зняти готівку</button></div>
+      <div class="divider"></div><div class="sectiontitle" style="margin-top:0"><h3>Погашення боргу</h3></div><p class="small muted">Зменшуй відсотки, закриваючи борг якомога раніше.</p><div class="formrow"><button class="btn green" id="repayBtn">Погасити ₴500</button><button class="btn outline" id="repayAllBtn">Закрити борг</button></div>
+      <div class="divider"></div><div class="row between"><div><b>Екстрений кредит</b><div class="small muted" style="margin-top:3px">Отримай ₴3 000 зараз, повернути потрібно ₴3 500.</div></div><button class="btn orange" id="loanBtn">Отримати</button></div>
+    </div>
+    <div class="card"><div class="sectiontitle" style="margin-top:0"><h3>Фінансова подушка</h3><span>Ціль ₴50 000</span></div><div class="statvalue" id="goalAmount" style="font-size:31px">₴12 000</div><div class="progresslabel"><span>Заощадження на рахунку</span><b id="goalPercent">24%</b></div><div class="bar green"><i id="goalBar"></i></div><p class="small muted" id="goalHint" style="margin:12px 0 0">Кожен переказ наближає тебе до спокою.</p>
+      <div class="divider"></div><div class="sectiontitle" style="margin-top:0"><h3>Капітал за останні дні</h3></div><div class="chart" id="wealthChart"></div><div class="row between small muted"><span>Раніше</span><span>Зараз</span></div>
+    </div>
+  </div>
+  <div class="sectiontitle"><h3>Витрати, які варто планувати</h3><span>Автоматичні платежі</span></div>
+  <div class="grid stats" style="grid-template-columns:repeat(3,minmax(0,1fr))">
+    <div class="card"><div class="statlabel">Оренда</div><div class="statvalue" style="font-size:21px">₴3 800</div><div class="statfoot">Кожні 7 днів</div></div>
+    <div class="card"><div class="statlabel">Комунальні</div><div class="statvalue" style="font-size:21px">₴450</div><div class="statfoot">Кожні 3 дні</div></div>
+    <div class="card"><div class="statlabel">Банківські відсотки</div><div class="statvalue" style="font-size:21px">0,2%</div><div class="statfoot">На залишок щодня</div></div>
+  </div>
+</section>
+<section class="page" id="page-profile">
+  <div class="pagehead"><div><div class="eyebrow">Довга гра</div><h2>Мій шлях</h2><p>Відстежуй рішення, звички та фінансові результати.</p></div><span class="pill">Особиста статистика</span></div>
+  <div class="grid stats">
+    <div class="card"><div class="statlabel">Зароблено всього</div><div class="statvalue" id="totalEarned">₴0</div><div class="statfoot">Зарплата й бонуси</div></div>
+    <div class="card"><div class="statlabel">Витрачено всього</div><div class="statvalue" id="totalSpent">₴0</div><div class="statfoot">Побут і рішення</div></div>
+    <div class="card"><div class="statlabel">Прожито днів</div><div class="statvalue" id="daysLived">1</div><div class="statfoot">Твій шлях триває</div></div>
+    <div class="card"><div class="statlabel">Виконано змін</div><div class="statvalue" id="profileShifts">0</div><div class="statfoot">Кроки до кар'єрного росту</div></div>
+  </div>
+  <div class="split">
+    <div class="card"><div class="sectiontitle" style="margin-top:0"><h3>Твої цілі</h3></div>
+      <div class="milestone"><div class="milestoneicon">🛟</div><div class="grow"><b>Фінансова подушка</b><small>Накопичити ₴50 000 на рахунку</small><div class="bar green" style="margin-top:8px"><i id="profileGoalBar"></i></div></div><span class="badge" id="profileGoalBadge">0%</span></div>
+      <div class="milestone"><div class="milestoneicon">💳</div><div class="grow"><b>Життя без боргів</b><small>Повністю погасити поточний борг</small></div><span class="badge" id="debtGoalBadge">У процесі</span></div>
+      <div class="milestone"><div class="milestoneicon">🏡</div><div class="grow"><b>Затишний дім</b><small>Покращити житло до максимального рівня</small></div><span class="badge" id="homeGoalBadge">0/3</span></div>
+      <div class="milestone"><div class="milestoneicon">📈</div><div class="grow"><b>Кар'єрний ріст</b><small>Досягти найвищого професійного рівня</small></div><span class="badge" id="careerGoalBadge">1/5</span></div>
+    </div>
+    <div class="card"><div class="sectiontitle" style="margin-top:0"><h3>Останні рішення</h3></div><div id="profileLedger" class="ledger"></div><div class="divider"></div><b>Керування збереженням</b><p class="small muted">Прогрес зберігається локально у браузері. Скидання почне нову історію на цьому пристрої.</p><button class="btn red full" id="resetBtn">Почати нове життя</button></div>
+  </div>
+</section>
+</main>
+</div>
+<nav class="mobile-nav">
+  <button class="navbtn active" data-page="overview"><span class="ico">▦</span>Огляд</button>
+  <button class="navbtn" data-page="work"><span class="ico">▤</span>Робота</button>
+  <button class="navbtn" data-page="home"><span class="ico">⌂</span>Дім</button>
+  <button class="navbtn" data-page="finance"><span class="ico">↗</span>Фінанси</button>
+  <button class="navbtn" data-page="profile"><span class="ico">◎</span>Шлях</button>
+</nav>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<div class="modalback" id="modalback" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><div class="modal"><div class="modalico" id="modalIcon">✨</div><h3 id="modalTitle">Подія</h3><p id="modalText"></p><div class="modalactions"><button class="btn primary full" id="modalOk">Продовжити</button></div></div></div>
 <script>
 (function(){
+"use strict";
 const $=id=>document.getElementById(id);
-const items={bean:{e:"🫘",n:"Кавове зерно",l:1,next:"grounds"},grounds:{e:"☕",n:"Мелена кава",l:2,next:"cup"},cup:{e:"🥤",n:"Кава з собою",l:3,next:"latte"},latte:{e:"☕",n:"Фірмове лате",l:4},cookie:{e:"🍪",n:"Печиво",l:1,next:"cake"},cake:{e:"🧁",n:"Кексик",l:2,next:"tart"},tart:{e:"🥧",n:"Ягідний пиріг",l:3},flower:{e:"🌷",n:"Квітка",l:1,next:"bouquet"},bouquet:{e:"💐",n:"Букет",l:2,next:"vase"},vase:{e:"🏺",n:"Ваза з квітами",l:3},fish:{e:"🐟",n:"Рибка",l:1,next:"meal"},meal:{e:"🍲",n:"Рибна юшка",l:2},shell:{e:"🐚",n:"Мушля",l:1}};
-const start=["bean","bean","cookie","cookie","flower","bean","cookie","flower","fish","shell","grounds","bean","cookie","flower","fish","cookie","bean","shell",null,null];
-const fresh=()=>({coins:120,energy:20,xp:28,level:1,board:start.slice(),order:0,decor:0,story:0,ordersDone:0,lastEnergyAt:Date.now()});
-let s;try{s=JSON.parse(localStorage.getItem("zatyshna-havan-save"))||fresh()}catch(e){s=fresh()}if(!Array.isArray(s.board)||s.board.length!==20)s=fresh();s.coins??=120;s.energy??=20;s.xp??=0;s.level??=1;s.decor??=0;s.story??=0;s.ordersDone??=0;s.lastEnergyAt??=Date.now();
-let selected=null,timer,mergeCell=-1;
-const orders=[{e:"☕",n:"Кава для рибалки",d:"кавових зерняток",type:"bean",qty:2,reward:25,xp:20},{e:"🍪",n:"Солодкий перекус",d:"печива",type:"cookie",qty:2,reward:30,xp:25},{e:"🌷",n:"Квіти для тераси",d:"квіточки",type:"flower",qty:2,reward:35,xp:30},{e:"☕",n:"Особливе лате",d:"меленої кави",type:"grounds",qty:2,reward:45,xp:35},{e:"🐟",n:"Улов дня",d:"рибки",type:"fish",qty:2,reward:32,xp:28},{e:"🧁",n:"Сюрприз до чаю",d:"кексик",type:"cake",qty:1,reward:40,xp:35}];
-function save(){localStorage.setItem("zatyshna-havan-save",JSON.stringify(s))}
-function say(t){$("toast").textContent=t;$("toast").classList.add("show");clearTimeout(timer);timer=setTimeout(()=>$("toast").classList.remove("show"),2000)}
-function cur(){return orders[s.order%orders.length]}function count(t){return s.board.filter(x=>x===t).length}
-function energy(){let n=Math.floor((Date.now()-s.lastEnergyAt)/300000);if(n>0){s.energy=Math.min(30,s.energy+n);s.lastEnergyAt+=n*300000}}
-function xp(n){s.xp+=n;while(s.xp>=100){s.xp-=100;s.level++;s.coins+=20;say("Новий рівень! +20 монет 🎉")}}
-function render(){energy();$("coins").textContent=s.coins;$("energy").textContent=s.energy;$("level").textContent="РІВЕНЬ "+s.level;$("xptext").textContent=s.xp+" / 100 ⭐";$("xpbar").style.width=s.xp+"%";
-let o=cur(),have=count(o.type);$("orderEmoji").textContent=o.e;$("orderName").textContent=o.n;$("orderDesc").textContent="Потрібно "+o.qty+" "+o.d+". Є: "+have+"/"+o.qty;$("reward").textContent=o.reward;$("deliverBtn").disabled=have<o.qty;$("orderCount").textContent="Виконано: "+s.ordersDone;
-$("board").innerHTML="";s.board.forEach((id,i)=>{let b=document.createElement("button");b.className="cell"+(id?" filled":"")+(selected===i?" selected":"")+(mergeCell===i?" merged":"");b.setAttribute("aria-label",id?items[id].n:"Порожня клітинка");if(id){let em=document.createElement("span");em.className="emoji";em.textContent=items[id].e;b.appendChild(em);let lv=document.createElement("span");lv.className="lv";lv.textContent="Р"+items[id].l;b.appendChild(lv)}b.onclick=()=>tap(i);$("board").appendChild(b)});
-$("boardCount").textContent=s.board.filter(Boolean).length+" / 20 клітинок";$("spawnBtn").disabled=s.energy<1||!s.board.includes(null);$("energyBtn").disabled=s.coins<15||s.energy>=30;$("sceneTitle").innerHTML=s.decor?"Гавань оживає!<br>Мрії стають реальністю":"Маленьке кафе,<br>великі мрії";$("sceneSub").textContent=s.decor?"Відновлено куточків: "+s.decor+" · Марійка пишається тобою!":"Допоможи Марійці повернути гавані затишок.";$("restoreDesc").textContent="Відновлено "+s.decor+" з 5 куточків. Виконуй замовлення, щоб здобувати досвід.";$("restoreBtn").disabled=s.xp<30||s.decor>=5;$("restoreBtn").textContent=s.decor>=5?"Усе відновлено ✓":"Відновити · 30 ⭐";save()}
-function tap(i){let id=s.board[i];if(selected===null){if(!id){say("Спочатку обери предмет 🙂");return}selected=i;render();return}if(selected===i){selected=null;render();return}let from=s.board[selected];if(id===from){let next=items[from].next;if(!next){say("Цей предмет уже найвищого рівня!");selected=null;render();return}s.board[selected]=null;s.board[i]=next;selected=null;mergeCell=i;setTimeout(()=>{mergeCell=-1;render()},500);xp(8);say(items[next].n+" створено! ✨");render();return}if(!id){s.board[i]=from;s.board[selected]=null;selected=null;render();return}selected=i;render()}
-$("spawnBtn").onclick=()=>{energy();if(s.energy<1){say("Енергія відновлюється: +1 кожні 5 хвилин.");return}let i=s.board.indexOf(null);if(i<0){say("Столик заповнений — об'єднай предмети!");return}s.board[i]="bean";s.energy--;s.lastEnergyAt=Date.now();say("Свіже кавове зернятко готове ☕");render()};
-$("energyBtn").onclick=()=>{if(s.coins<15||s.energy>=30)return;s.coins-=15;s.energy=Math.min(30,s.energy+5);say("+5 енергії!");render()};
-$("deliverBtn").onclick=()=>{let o=cur();if(count(o.type)<o.qty)return;let left=o.qty;for(let i=0;i<s.board.length&&left;i++)if(s.board[i]===o.type){s.board[i]=null;left--}s.coins+=o.reward;xp(o.xp);s.order++;s.ordersDone++;say("Замовлення виконано! +"+o.reward+" монет 🪙");$("scene").classList.add("rewarded");setTimeout(()=>$("scene").classList.remove("rewarded"),900);render()};
-$("restoreBtn").onclick=()=>{if(s.xp<30||s.decor>=5)return;s.xp-=30;s.decor++;s.coins+=10;say("Терасу відновлено! +10 монет 🌿");render();if(s.decor===5)modal("🌅","Гавань знову прекрасна!","Ти відновив(-ла) всі п'ять куточків. Марійка відчиняє кафе для першого великого свята!")};
-function modal(e,t,p){$("mEmoji").textContent=e;$("mTitle").textContent=t;$("mText").textContent=p;$("back").classList.add("show")}$("close").onclick=()=>$("back").classList.remove("show");
-document.querySelectorAll(".nav button").forEach(b=>b.onclick=()=>{document.querySelectorAll(".nav button").forEach(x=>x.classList.remove("active"));b.classList.add("active");let tab=b.dataset.tab;if(tab==="home"){say("Ласкаво просимо до гавані 🌊");return}if(tab==="orders")modal("🧾","Замовлення гавані","Збирай потрібні предмети та здавай повне замовлення. За кожне отримуєш монети й досвід.
-
-Об'єднання звільняє місце та дає зірочки!");if(tab==="story"){s.story++;let chapters=[["📖","Розділ 1. Новий початок","Марійка повернулася до старого сімейного кафе. Гавань змінилася, а таємничий лист натякає, що тут приховано більше, ніж здається…"],["✉️","Розділ 2. Лист із минулого","У шухляді Марійка знаходить листівку: «Дім стає домом завдяки людям, які в ньому збираються». Хто її залишив?"],["🌊","Розділ 3. Морський секрет","Старий рибалка впізнає символ на листівці. Він обіцяє розповісти історію, коли кафе знову прийматиме гостей."],["🎉","Розділ 4. Свято гавані","Кафе наповнюється сміхом та ароматом кави. На порозі з'являється незнайомка з новим листом…"]];let c=chapters[Math.min(s.story-1,3)];modal(c[0],c[1],c[2]);save()}if(tab==="decor"){if(s.coins>=40&&s.decor<5){s.coins-=40;s.decor++;xp(10);render();modal("🪴","Затишніше з кожним днем!","Ти облаштував(-ла) ще один куточок гавані.")}else modal("🪴","Декор для гавані",s.decor>=5?"Усі куточки вже відновлено!":"Новий декор коштує 40 монет. Виконуй замовлення, щоб назбирати!")}});render();setInterval(()=>{let old=s.energy;energy();if(old!==s.energy)render()},60000);if("serviceWorker"in navigator&&location.protocol!=="file:")addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+const SAVE_KEY="moie-zhyttia-save-v1";
+const JOBS=[
+ {name:"Стажер",short:"Початок кар'єри",base:650,skill:0,shifts:0},
+ {name:"Молодший спеціаліст",short:"Набираєшся досвіду",base:800,skill:15,shifts:2},
+ {name:"Спеціаліст",short:"Самостійна робота",base:1020,skill:30,shifts:5},
+ {name:"Старший спеціаліст",short:"Складні задачі й наставництво",base:1280,skill:50,shifts:10},
+ {name:"Керівник напрямку",short:"Відповідальність і команда",base:1650,skill:75,shifts:18}
+];
+const fresh=()=>({day:1,hour:8,cash:8500,bank:12000,debt:2800,energy:82,hunger:76,mood:70,health:100,skill:12,xp:20,tier:0,shifts:0,homeLevel:0,totalEarned:0,totalSpent:0,workedToday:false,ateToday:false,savedToday:false,loanUsed:false,log:[],history:[],eventCount:0});
+let s;
+try{s=JSON.parse(localStorage.getItem(SAVE_KEY))}catch(e){s=null}
+const valid=s&&typeof s==="object"&&Number.isFinite(s.day)&&Number.isFinite(s.cash)&&Number.isFinite(s.bank)&&Number.isFinite(s.debt);
+if(!valid)s=fresh();
+const defaults=fresh();Object.keys(defaults).forEach(k=>{if(s[k]===undefined)s[k]=defaults[k]});
+function clamp(n,min=0,max=100){return Math.max(min,Math.min(max,Number(n)||0))}
+function money(n){return "₴"+Math.round(n).toLocaleString("uk-UA")}
+function net(){return s.cash+s.bank-s.debt}
+function salary(){return JOBS[s.tier].base+Math.floor(s.skill*8)}
+function save(){try{localStorage.setItem(SAVE_KEY,JSON.stringify(s))}catch(e){toast("Не вдалося зберегти прогрес у браузері.")}}
+let toastTimer;
+function toast(message){$("toast").textContent=message;$("toast").classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>$("toast").classList.remove("show"),2400)}
+function log(icon,title,detail,amount){s.log.unshift({icon,title,detail,amount,day:s.day});s.log=s.log.slice(0,8)}
+function spend(amount,label,allowCredit=false){
+ amount=Math.max(0,Math.round(amount));
+ if(!allowCredit&&s.cash+s.bank<amount){toast("Недостатньо коштів для цієї покупки.");return false}
+ let left=amount,fromCash=Math.min(s.cash,left);s.cash-=fromCash;left-=fromCash;
+ let fromBank=Math.min(s.bank,left);s.bank-=fromBank;left-=fromBank;
+ if(left>0)s.debt+=left;
+ s.totalSpent+=amount;log("↘",label,"Витрати", -amount);return true
+}
+function earn(amount,label){
+ amount=Math.round(amount);s.cash+=amount;s.totalEarned+=amount;log("↗",label,"Надходження",amount)
+}
+function dailyTick(){
+ const interest=Math.floor(s.bank*.002);
+ if(interest>0){s.bank+=interest;s.totalEarned+=interest;log("🏦","Відсотки за заощадження","Нараховано за день",interest)}
+ if(s.debt>0){const fee=Math.max(1,Math.ceil(s.debt*.004));s.debt+=fee;s.totalSpent+=fee;log("↘","Відсотки за боргом","Нараховано за день",-fee)}
+ if(s.day%3===0){spend(450,"Комунальні платежі",true);toast("Сплачено комунальні: ₴450.")}
+ if(s.day%7===0){spend(3800,"Оренда житла",true);toast("День оренди: ₴3 800. Плануй бюджет заздалегідь.")}
+ s.workedToday=false;s.ateToday=false;s.savedToday=false;
+ s.history.push(net());s.history=s.history.slice(-7);
+}
+function advance(hours){
+ const oldDay=s.day;s.hour+=hours;
+ s.energy=clamp(s.energy-hours*.8);s.hunger=clamp(s.hunger-hours*1.35);s.mood=clamp(s.mood-hours*.35);
+ while(s.hour>=24){s.hour-=24;s.day++;dailyTick()}
+ if(s.day!==oldDay)toast("Настав новий день. Перевір бюджет і плани.");
+}
+function maybeEvent(){
+ if(Math.random()>.22)return;
+ const events=[
+  {icon:"🎁",title:"Невеликий бонус",text:"Твої зусилля помітили — отримуєш несподіваний бонус ₴220.",run:()=>earn(220,"Несподіваний бонус")},
+  {icon:"🛠️",title:"Незапланована витрата",text:"Довелося терміново купити дрібну річ для дому. Це коштує ₴180.",run:()=>spend(180,"Незапланована покупка",true)},
+  {icon:"☀️",title:"Хороший день",text:"Сьогодні все складається вдало. Настрій покращився.",run:()=>{s.mood=clamp(s.mood+14);s.health=clamp(s.health+2)}},
+  {icon:"💡",title:"Корисна порада",text:"Ти знайшов спосіб заощадити на побуті. +₴120 до бюджету.",run:()=>earn(120,"Побутова економія")}
+ ];
+ const e=events[Math.floor(Math.random()*events.length)];e.run();s.eventCount++;showModal(e.icon,e.title,e.text)
+}
+function showModal(icon,title,text){$("modalIcon").textContent=icon;$("modalTitle").textContent=title;$("modalText").textContent=text;$("modalback").classList.add("show")}
+$("modalOk").onclick=()=>$("modalback").classList.remove("show");
+$("modalback").addEventListener("click",e=>{if(e.target===$("modalback"))$("modalback").classList.remove("show")});
+function taskReward(key,condition,title,reward){
+ if(condition&&!s[key]){s[key]=true;earn(reward,"Бонус: "+title);toast("Завдання виконано! +"+money(reward))}
+}
+function tasks(){return [
+ {key:"workedToday",title:"Відпрацювати зміну",desc:"Зароби гроші й досвід",reward:180,done:s.workedToday},
+ {key:"ateToday",title:"Подбати про себе",desc:"Купити продукти на день",reward:120,done:s.ateToday},
+ {key:"savedToday",title:"Зробити заощадження",desc:"Переказати від ₴500 у банк",reward:150,done:s.savedToday}
+]}
+function completeTask(key){const t=tasks().find(x=>x.key===key);if(t&&!t.done){earn(t.reward,"Бонус: "+t.title);if(key==="workedToday")s.workedToday=true;if(key==="ateToday")s.ateToday=true;if(key==="savedToday")s.savedToday=true;toast("Щоденну ціль виконано! +"+money(t.reward))}}
+function buyFood(){
+ if(!spend(250,"Продукти"))return;
+ s.hunger=clamp(s.hunger+48);s.health=clamp(s.health+2);advance(1);completeTask("ateToday");render()
+}
+function coffee(){
+ if(!spend(75,"Кава й перерва"))return;
+ s.energy=clamp(s.energy+12);s.mood=clamp(s.mood+8);advance(1);toast("Перерва допомогла трохи відновитися ☕");render()
+}
+function sleep(){
+ advance(8);s.energy=100;s.mood=clamp(s.mood+18);s.health=clamp(s.health+(s.homeLevel+1)*2);toast("Ти відпочив(-ла). Енергія відновлена.");render()
+}
+function work(){
+ if(s.energy<25){toast("Замало енергії. Відпочинь перед зміною.");return}
+ if(s.hunger<10){toast("Ти дуже голодний(-а). Спочатку подбай про їжу.");return}
+ const pay=salary();earn(pay,"Зарплата за робочу зміну");s.shifts++;s.skill=clamp(s.skill+2,0,100);s.xp+=20;
+ s.energy=clamp(s.energy-25);s.hunger=clamp(s.hunger-8);s.mood=clamp(s.mood-9);
+ advance(8);completeTask("workedToday");toast("Зміну завершено: +"+money(pay)+" і досвід.");maybeEvent();render()
+}
+function training(){
+ if(s.energy<15){toast("Потрібно більше енергії для навчання.");return}
+ if(!spend(250,"Професійне навчання"))return;
+ advance(3);s.skill=clamp(s.skill+5,0,100);s.xp+=10;s.mood=clamp(s.mood+3);
+ toast("Навички зросли! Твоя наступна зміна буде вигіднішою.");render()
+}
+function promote(){
+ if(s.tier>=JOBS.length-1){toast("Ти вже досяг(-ла) найвищого рівня кар'єри!");return}
+ const next=JOBS[s.tier+1];
+ if(s.skill<next.skill||s.shifts<next.shifts){toast("Поки що бракує навичок або робочого досвіду.");return}
+ s.tier++;s.mood=clamp(s.mood+12);s.xp+=35;log("⬆️","Підвищення: "+JOBS[s.tier].name,"Новий рівень кар'єри",0);toast("Вітаємо! Ти тепер: "+JOBS[s.tier].name);render()
+}
+function improveHome(){
+ const levels=[
+  {name:"Зручне робоче місце",price:2500,desc:"Комфортне місце для роботи й відпочинку."},
+  {name:"Оновлена кухня",price:6500,desc:"Краще облаштована кухня для щоденного життя."},
+  {name:"Повний затишок",price:14000,desc:"Дім, у якому легко відновлюватися."}
+ ];
+ const next=levels[s.homeLevel];if(!next){toast("Житло вже максимально облаштоване!");return}
+ if(s.cash+s.bank<next.price){toast("Поки не вистачає коштів на це покращення.");return}
+ if(!spend(next.price,next.name))return;s.homeLevel++;s.mood=clamp(s.mood+10);s.health=clamp(s.health+5);log("🏡",next.name,"Покращення житла", -next.price);toast("Дім став затишнішим. Комфорт підвищено!");render()
+}
+function amountInput(){const n=Math.floor(Number($("transferAmount").value));if(!Number.isFinite(n)||n<1||n>10000000){toast("Введи коректну суму.");return 0}return n}
+function deposit(){
+ const n=amountInput();if(!n)return;if(s.cash<n){toast("Недостатньо готівки для переказу.");return}
+ s.cash-=n;s.bank+=n;log("🏦","Переказ у банк","Готівка → рахунок",0);advance(1);if(n>=500)completeTask("savedToday");toast("На рахунок переказано "+money(n)+".");render()
+}
+function withdraw(){
+ const n=amountInput();if(!n)return;if(s.bank<n){toast("На рахунку недостатньо коштів.");return}
+ s.bank-=n;s.cash+=n;log("💵","Зняття готівки","Рахунок → готівка",0);advance(1);toast("Знято "+money(n)+".");render()
+}
+function repay(amount){
+ amount=Math.min(Math.floor(amount),s.debt);
+ if(amount<=0){toast("Борг уже погашено!");return}
+ if(s.cash+s.bank<amount){toast("Недостатньо коштів для такого погашення.");return}
+ let left=amount,fromCash=Math.min(s.cash,left);s.cash-=fromCash;left-=fromCash;const fromBank=Math.min(s.bank,left);s.bank-=fromBank;left-=fromBank;
+ s.debt=Math.max(0,s.debt-amount);s.totalSpent+=amount;log("✓","Погашення боргу","Платіж за кредитом",-amount);advance(1);toast("Борг зменшено на "+money(amount)+".");render()
+}
+function loan(){
+ if(s.loanUsed||s.debt>8000){toast("Екстрений кредит зараз недоступний.");return}
+ s.cash+=3000;s.debt+=3500;s.loanUsed=true;log("⚠️","Екстрений кредит","Отримано ₴3 000, до повернення ₴3 500",3000);toast("Кредит отримано. Пам'ятай про щоденні відсотки.");render()
+}
+function renderTasks(){
+ const list=tasks();$("tasks").innerHTML=list.map(t=>'<div class="task '+(t.done?'done':'')+'"><div class="taskcheck">'+(t.done?'✓':'·')+'</div><div class="grow"><div class="taskname">'+t.title+'</div><div class="taskdesc">'+t.desc+'</div></div><div class="taskreward">+'+money(t.reward)+'</div></div>').join("");
+ $("taskProgress").textContent=list.filter(t=>t.done).length+"/3"
+}
+function renderLedger(target){
+ const el=$(target);if(!s.log.length){el.innerHTML='<div class="empty">Тут з’являтимуться твої рішення та фінансові події.</div>';return}
+ el.innerHTML=s.log.slice(0,target==="profileLedger"?6:5).map(x=>'<div class="ledgeritem"><div class="ledgericon">'+x.icon+'</div><div class="grow"><div class="ledgername">'+x.title+'</div><div class="ledgerdate">День '+x.day+' · '+x.detail+'</div></div><div class="ledgeramount '+(x.amount>0?'positive':x.amount<0?'negative':'')+'">'+(x.amount>0?'+'+money(x.amount):x.amount<0?'−'+money(Math.abs(x.amount)):'—')+'</div></div>').join("")
+}
+function renderCareer(){
+ const next=JOBS[Math.min(s.tier+1,JOBS.length-1)];
+ $("jobTitle").textContent=JOBS[s.tier].name;$("jobSub").textContent=JOBS[s.tier].short+" · повна зайнятість";$("careerPill").textContent="Рівень "+(s.tier+1);
+ $("workPay").textContent=money(salary());$("shiftCount").textContent=s.shifts;$("skillValue").textContent=Math.round(s.skill)+"/100";$("skillLabel").textContent=Math.round(s.skill)+"%";$("skillBar").style.width=s.skill+"%";
+ $("promotionHint").textContent=s.tier>=JOBS.length-1?"Ти вже на найвищому рівні.":"Потрібно: навички "+next.skill+" і "+next.shifts+" змін. Зараз "+Math.round(s.skill)+" навичок та "+s.shifts+" змін.";
+ $("nextSalary").textContent=s.tier>=JOBS.length-1?"Максимум досягнуто":"+"+money(next.base-JOBS[s.tier].base)+"/зміна";$("promoteBtn").disabled=s.tier>=JOBS.length-1||s.skill<next.skill||s.shifts<next.shifts;
+ $("careerPath").innerHTML=JOBS.map((j,i)=>'<div class="milestone"><div class="milestoneicon">'+(i<s.tier?'✓':i===s.tier?'💼':'🔒')+'</div><div class="grow"><b>'+j.name+'</b><small>Базова ставка '+money(j.base)+' · навички '+j.skill+' · '+j.shifts+' змін</small></div><span class="badge">'+(i<s.tier?'Пройдено':i===s.tier?'Поточний':'Попереду')+'</span></div>').join("")
+}
+function renderHome(){
+ const levels=[
+  {name:"Зручне робоче місце",price:2500,icon:"🪑",desc:"Комфорт +1 · краще відновлення"},
+  {name:"Оновлена кухня",price:6500,icon:"🍳",desc:"Комфорт +1 · затишок і здоров'я"},
+  {name:"Повний затишок",price:14000,icon:"🪴",desc:"Комфорт +1 · максимум відновлення"}
+ ];
+ $("comfortPill").textContent="Комфорт "+(s.homeLevel+1)+"/4";
+ $("homeTitle").textContent=["Невелика орендована квартира","Квартира з робочим місцем","Оновлена квартира","Затишний дім"][s.homeLevel];
+ $("homeDesc").textContent=["Простий старт. Зроби житло місцем, де відновлюються сили.","З'явилося окреме місце для роботи та планування.","Кухня оновлена — побут стає зручнішим.","Ти створив(-ла) простір, який підтримує тебе щодня."][s.homeLevel];
+ $("homeChoices").innerHTML=levels.map((x,i)=>'<div class="choice '+(i<s.homeLevel?'owned':'')+'"><div class="choiceicon">'+(i<s.homeLevel?'✓':x.icon)+'</div><h4>'+x.name+'</h4><p>'+(i<s.homeLevel?'Покращення придбано':x.desc)+'</p><div class="price">'+(i<s.homeLevel?'Готово':money(x.price))+'</div><button class="btn '+(i===s.homeLevel?'primary':'secondary')+'" '+(i!==s.homeLevel?'disabled':'')+' data-upgrade="yes">'+(i<s.homeLevel?'Придбано':i===s.homeLevel?'Покращити':'Закрито')+'</button></div>').join("");
+ const btn=$("homeChoices").querySelector('[data-upgrade="yes"]');if(btn)btn.onclick=improveHome
+}
+function renderChart(){
+ const arr=s.history.length?s.history.slice(-7):[net()];const vals=arr.concat(net());const min=Math.min(...vals,0),max=Math.max(...vals,1),span=max-min||1;
+ $("wealthChart").innerHTML=vals.slice(-7).map((v,i)=>{const h=Math.max(6,((v-min)/span)*100);return '<div class="chartcol"><div class="chartbar" style="height:'+h+'%"></div><div class="chartlabel">'+(i===vals.slice(-7).length-1?'Зараз':'-'+(vals.slice(-7).length-1-i))+'</div></div>'}).join("")
+}
+function render(){
+ s.energy=clamp(s.energy);s.hunger=clamp(s.hunger);s.mood=clamp(s.mood);s.health=clamp(s.health);
+ $("topDay").textContent="День "+s.day;$("topTime").textContent=String(Math.floor(s.hour)).padStart(2,"0")+":00";$("topCash").textContent=money(s.cash);
+ $("netWorth").textContent=money(net());$("cashStat").textContent=money(s.cash);$("bankStat").textContent=money(s.bank);$("debtStat").textContent=money(s.debt);$("salaryStat").textContent=money(salary());$("jobFoot").textContent=JOBS[s.tier].name;
+ $("bankFoot").textContent="+"+money(Math.floor(s.bank*.002))+" потенційних відсотків/день";$("wealthHint").textContent=net()>=17700?"Капітал змінюється з кожним рішенням.": "Плануй витрати й поступово нарощуй капітал.";
+ $("energyLabel").textContent=Math.round(s.energy)+"%";$("energyBar").style.width=s.energy+"%";$("hungerLabel").textContent=Math.round(s.hunger)+"%";$("hungerBar").style.width=s.hunger+"%";$("moodLabel").textContent=Math.round(s.mood)+"%";$("moodBar").style.width=s.mood+"%";$("healthLabel").textContent=Math.round(s.health)+"%";$("healthBar").style.width=s.health+"%";
+ $("moodPill").textContent=s.mood>=70?"● Гарний темп":s.mood>=40?"● Звичайний день":"● Потрібен відпочинок";$("greeting").textContent=s.energy<25?"Ти втомився(-лася). Відпочинок — теж важливе рішення.":s.hunger<25?"Час подбати про їжу, перш ніж братися за роботу.":"Кожен день — новий шанс стати ближче до мети.";
+ $("finCash").textContent=money(s.cash);$("finBank").textContent=money(s.bank);$("finDebt").textContent=money(s.debt);$("finNet").textContent=money(net());$("goalAmount").textContent=money(s.bank);const pct=Math.min(100,Math.floor(s.bank/50000*100));$("goalPercent").textContent=pct+"%";$("goalBar").style.width=pct+"%";$("goalHint").textContent=s.bank>=50000?"Фінансову подушку створено! Тепер можна ставити амбітнішу мету.":"Ще "+money(Math.max(0,50000-s.bank))+" до цілі. Банк додає 0,2% щодня.";
+ $("totalEarned").textContent=money(s.totalEarned);$("totalSpent").textContent=money(s.totalSpent);$("daysLived").textContent=s.day;$("profileShifts").textContent=s.shifts;$("profileGoalBar").style.width=pct+"%";$("profileGoalBadge").textContent=pct+"%";$("debtGoalBadge").textContent=s.debt===0?"Виконано":"У процесі";$("homeGoalBadge").textContent=s.homeLevel+"/3";$("careerGoalBadge").textContent=(s.tier+1)+"/5";
+ $("workShift").disabled=s.energy<25||s.hunger<10;$("trainingBtn").disabled=s.energy<15||s.cash+s.bank<250;$("loanBtn").disabled=s.loanUsed||s.debt>8000;$("repayBtn").disabled=s.debt<=0||s.cash+s.bank<=0;$("repayAllBtn").disabled=s.debt<=0||s.cash+s.bank<s.debt;
+ renderTasks();renderLedger("ledger");renderLedger("profileLedger");renderCareer();renderHome();renderChart();save()
+}
+function go(page){
+ document.querySelectorAll(".page").forEach(x=>x.classList.toggle("active",x.id==="page-"+page));
+ document.querySelectorAll("[data-page]").forEach(x=>x.classList.toggle("active",x.dataset.page===page));
+ window.scrollTo({top:0,behavior:"smooth"})
+}
+document.querySelectorAll("[data-page]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.page)));
+document.querySelectorAll("[data-goto]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.goto)));
+$("workShift").onclick=work;$("quickWork").onclick=work;$("trainingBtn").onclick=training;$("promoteBtn").onclick=promote;
+$("quickFood").onclick=buyFood;$("homeFood").onclick=buyFood;$("homeCoffee").onclick=coffee;$("quickSleep").onclick=sleep;$("homeSleep").onclick=sleep;
+$("depositBtn").onclick=deposit;$("withdrawBtn").onclick=withdraw;$("repayBtn").onclick=()=>repay(500);$("repayAllBtn").onclick=()=>repay(s.debt);$("loanBtn").onclick=loan;
+$("resetBtn").onclick=()=>showModal("↻","Почати нове життя?","Увесь локальний прогрес цієї гри буде скинуто. Це не можна скасувати.");
+$("modalOk").addEventListener("click",()=>{if($("modalTitle").textContent==="Почати нове життя?"){s=fresh();save();$("modalback").classList.remove("show");go("overview");render();toast("Нова історія почалася!")}else $("modalback").classList.remove("show")});
+render();
+if("serviceWorker"in navigator&&location.protocol!=="file:"){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}
 })();
-</script></body></html>
+</script>
+</body>
+</html>
