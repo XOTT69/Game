@@ -29,9 +29,9 @@ jobs:
           node <<'NODE'
           const fs = require('node:fs');
           const html = fs.readFileSync('index.html', 'utf8');
-          const scripts = [...html.matchAll(/<script(?:\\s[^>]*)?>([\\s\\S]*?)<\\/script>/gi)];
+          const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)];
           if (!scripts.length) throw new Error('No inline JavaScript found');
-          for (const [i, match] of scripts.entries()) new Function(match[1]);
+          for (const match of scripts) new Function(match[1]);
           JSON.parse(fs.readFileSync('manifest.webmanifest', 'utf8'));
           for (const path of ['index.html', 'manifest.webmanifest', 'icon.svg', 'sw.js']) {
             if (!fs.existsSync(path)) throw new Error('Missing deploy asset: ' + path);
@@ -45,7 +45,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+      url: \${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     needs: validate
     steps:
